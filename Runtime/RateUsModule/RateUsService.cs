@@ -2,6 +2,9 @@ using System.Collections;
 using Google.Play.Review;
 using LittleBit.Modules.CoreModule;
 using UnityEngine;
+#if UNITY_IOS
+using UnityEngine.iOS;
+#endif
 
 namespace Unfo.Modules.RateUsModule
 {
@@ -43,7 +46,11 @@ namespace Unfo.Modules.RateUsModule
 
         public void ShowReviewWindowWithRequest()
         {
+#if UNITY_ANDROID
             _coroutineRunner.StartCoroutine(GetPlayReviewInfoWithShow());
+#elif UNITY_IOS
+            Device.RequestStoreReview();
+#endif
         }
     }
 }
